@@ -1,34 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Navigate, Route, Routes } from "react-router-dom"
+import LoginPage from "./pages/LoginPage"
+import Homepage from "./pages/Homepage"
+import Navbar from "./components/Navbar"
+import RegisterPage from "./pages/RegisterPage"
+import PageNotFound from "./pages/PageNotFound"
+import { GoogleOAuthProvider } from "@react-oauth/google"
+import { useState } from "react"
+import RefreshHandler from "./RefreshHandler"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  const GoogleAuthWrapper = () => {
+    return (
+      <GoogleOAuthProvider clientId={"115624061918-nqjcriv7cai0ifci30la0oopnjqrf4l5.apps.googleusercontent.com"}>
+        <LoginPage />
+      </GoogleOAuthProvider>
+    )
+  }
+
+  const PrivateRoute = ({ element }) => {
+    return isAuthenticated ? element : <Navigate to={'/login'} />
+  }
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <Navbar />
+      <RefreshHandler setIsAuthenticated={setIsAuthenticated} />
+      <Routes>
+        <Route path={'/'} element={<Navigate to={'/login'} />} />
+        <Route path={'/login'} element={<GoogleAuthWrapper />} />
+        <Route path={'/register'} element={<RegisterPage />} />
+        <Route path={'/home'} element={<PrivateRoute element={<Homepage />} />} />
+        <Route path={'*'} element={<PageNotFound />} />
+      </Routes>
+    </div>
   )
 }
 
