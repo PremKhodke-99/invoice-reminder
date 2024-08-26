@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import InvoiceList from '../components/InvoiceList';
 import { useNavigate } from 'react-router-dom';
 
 const Homepage = () => {
@@ -22,6 +23,8 @@ const Homepage = () => {
       <h3>{userInfo?.email}</h3>
       <img src={userInfo?.image} alt={userInfo?.name} />
       <button onClick={handleLogout}>Logout</button>
+
+      <InvoiceList />
     </div>
   )
 }

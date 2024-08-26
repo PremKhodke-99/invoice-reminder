@@ -2,7 +2,6 @@ import { Navigate, Route, Routes } from "react-router-dom"
 import LoginPage from "./pages/LoginPage"
 import Homepage from "./pages/Homepage"
 import Navbar from "./components/Navbar"
-import RegisterPage from "./pages/RegisterPage"
 import PageNotFound from "./pages/PageNotFound"
 import { GoogleOAuthProvider } from "@react-oauth/google"
 import { useState } from "react"
@@ -29,7 +28,6 @@ function App() {
       <Routes>
         <Route path={'/'} element={<Navigate to={'/login'} />} />
         <Route path={'/login'} element={<GoogleAuthWrapper />} />
-        <Route path={'/register'} element={<RegisterPage />} />
         <Route path={'/home'} element={<PrivateRoute element={<Homepage />} />} />
         <Route path={'*'} element={<PageNotFound />} />
       </Routes>

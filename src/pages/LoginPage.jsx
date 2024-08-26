@@ -10,6 +10,8 @@ const LoginPage = () => {
     const responseGoogle = async (authResult) => {
         try {
             if (authResult['code']) {
+                console.log(authResult['code']);
+                
                 const result = await googleAuth(authResult['code']);
                 console.log(result.data);
                 const { email, name, image } = result.data.user;

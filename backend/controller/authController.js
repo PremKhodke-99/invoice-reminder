@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 
 const googleLogin = async (req, res) => {
   try {
+
     const { code } = req.query;
     const googleRes = await oauth2client.getToken(code);
     oauth2client.setCredentials(googleRes.tokens);
@@ -13,22 +14,18 @@ const googleLogin = async (req, res) => {
       `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${googleRes.tokens.access_token}`
     );
 
-    const { email, name, picture } = userRes.data;
+    const { id, email, name, picture } = userRes.data;
+
     let user = await User.findOne({ email });
     if (!user) {
-      user = await User.create({ name, email, image: picture });
+      user = await User.create({ googleId: id, name, email, image: picture });
     }
     const { _id } = user;
     console.log(_id, process.env.JWT_SECRET, process.env.JWT_TIMEOUT);
 
-    const token = jwt.sign({ _id, email }, 
-      process.env.JWT_SECRET, 
-      {
-        expiresIn: process.env.JWT_TIMEOUT,
-      }
-  );
-
-    console.log(7);
+    const token = jwt.sign({ _id, email }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_TIMEOUT,
+    });
 
     return res.status(200).json({
       success: true,
