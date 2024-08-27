@@ -14,9 +14,9 @@ const LoginPage = () => {
                 
                 const result = await googleAuth(authResult['code']);
                 console.log(result.data);
-                const { email, name, image } = result.data.user;
+                const { googleId, email, name, image } = result.data.user;
                 const token = result.data.token;
-                const obj = { email, name, image, token };
+                const obj = { googleId, email, name, image, token };
                 localStorage.setItem('user-info', JSON.stringify(obj));
                 navigate('/home')
             }

@@ -20,7 +20,7 @@ export default function ButtonAppBar() {
             {
                 data?.token ? <div className='flex items-center'>
                     <img src={data.image} alt={data.name} className='rounded-full h-10' />
-                    <h1 className="text-lg rounded-lg px-3 py-2 font-medium hover:bg-slate-100 hover:text-slate-900">{data.name}</h1>
+                    <h1 className="text-lg rounded-lg px-3 py-2 font-medium">{data.name}</h1>
                     <button type='button' className='rounded-lg px-3 py-2 font-medium bg-slate-100 text-slate-900' onClick={handleLogout}>Logout</button>
                 </div> : <div>
                     {[
