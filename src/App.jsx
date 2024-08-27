@@ -22,7 +22,7 @@ function App() {
     return isAuthenticated ? element : <Navigate to={'/login'} />
   }
   return (
-    <div>
+    <div className="bg-slate-50 h-[100vh] w-full">
       <Navbar />
       <RefreshHandler setIsAuthenticated={setIsAuthenticated} />
       <Routes>

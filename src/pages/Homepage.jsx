@@ -5,7 +5,6 @@ import Modal from '../components/Modal';
 
 const Homepage = () => {
   const [userInfo, setUserInfo] = useState();
-  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
@@ -13,11 +12,6 @@ const Homepage = () => {
     const userData = JSON.parse(data);
     setUserInfo(userData);
   }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem('user-info');
-    navigate('/login')
-  }
 
   return (
     <div>

@@ -5,7 +5,7 @@ const Invoice = require("../models/invoice.model");
 router.post("/trigger", async (req, res) => {
   const { invoiceId } = req.body;  
   const invoice = await Invoice.findById(invoiceId);
-  console.log(invoice);
+  // console.log(invoice);
   
   if (!invoice) {
     return res.status(404).send("Invoice not found");
@@ -13,7 +13,7 @@ router.post("/trigger", async (req, res) => {
 
   // Trigger Zapier webhook
   try {
-    console.log(1);
+    // console.log(1);
     const response = await axios.post(process.env.ZAPIER_WEBHOOK_URL, {
       invoiceId,
       description: invoice.description,

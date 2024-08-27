@@ -54,8 +54,6 @@ router.get("/:userId", async (req, res) => {
 });
 
 router.post("/add", async (req, res) => {
-  console.log(1);
-
   const { userId, description, amount, dueDate, recipient } = req.body;
   const newInvoice = new Invoice({
     userId,

@@ -42,7 +42,7 @@ const InvoiceList = () => {
       <ul className='mt-8 grid grid-cols-3 gap-10'>
         {
           invoices.map((invoice, i) => (
-            <li key={i} className='h-max w-[100%] shadow-md rounded-md p-6'>
+            <li key={i} className='h-max w-[100%] shadow-md rounded-md p-6 bg-white'>
               <h5 className='text-lg'>Title: {invoice.description}</h5>
               <p>Amount: <strong>Rs.{invoice.amount}</strong></p>
               <p>Due: {invoice.dueDate}</p>
